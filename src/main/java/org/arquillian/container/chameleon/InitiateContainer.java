@@ -59,7 +59,6 @@ public class InitiateContainer {
                 String propertyName = toCamelCase(setter);
                 if(properties.containsKey(propertyName)) {
                     setter.invoke(configuration, properties.get(propertyName));
-                    node.getSingle("configuration").removeChild("property@name=" + propertyName);
                 }
             }
         }
