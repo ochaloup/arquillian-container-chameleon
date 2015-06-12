@@ -5,7 +5,6 @@ import static org.arquillian.container.chameleon.Utils.toMavenDependencies;
 import static org.arquillian.container.chameleon.Utils.toURLs;
 
 import java.io.File;
-import java.net.URLClassLoader;
 import java.util.concurrent.Callable;
 
 import org.arquillian.container.chameleon.ChameleonContainer;
@@ -149,7 +148,7 @@ public class TargetController {
 
             File[] archives = Maven.configureResolver().addDependencies(mavenDependencies).resolve().withTransitivity()
                     .asFile();
-            return new URLClassLoader(toURLs(archives), ChameleonContainer.class.getClassLoader());
+            return new ChameleonURLClassLoader(toURLs(archives), ChameleonContainer.class.getClassLoader());
 
         } catch (Exception e) {
             throw new RuntimeException("Could not resolve target " + targetAdapter + " adapter dependencies", e);
